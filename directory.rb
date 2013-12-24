@@ -1,14 +1,14 @@
 # let's put all students into a hash
 students = [
-  {:name => "Dr. Hannibal Lecter", :cohort => :november},
-  {:name => "Darth Vader", :cohort => :november},
-  {:name => "Nurse Ratched", :cohort => :november},
-  {:name => "Michael Corleone", :cohort => :november},
-  {:name => "Alex De Large", :cohort => :november},
-  {:name => "The Alien", :cohort => :november},
-  {:name => "Terminator", :cohort => :november},
-  {:name => "Freddy Kruger", :cohort => :november},
-  {:name => "The Joker", :cohort => :november}
+  {:name => "Dr. Hannibal Lecter", :cohort => :november, :nationality => 'US'},
+  {:name => "Darth Vader", :cohort => :november, :nationality => 'US'},
+  {:name => "Nurse Ratched", :cohort => :november, :nationality => 'US'},
+  {:name => "Michael Corleone", :cohort => :november, :nationality => 'US'},
+  {:name => "Alex De Large", :cohort => :november, :nationality => 'US'},
+  {:name => "The Alien", :cohort => :november, :nationality => 'US'},
+  {:name => "Terminator", :cohort => :november, :nationality => 'US'},
+  {:name => "Freddy Kruger", :cohort => :november, :nationality => 'US'},
+  {:name => "The Joker", :cohort => :november, :nationality => 'US'}
 ]
 
 def print_header
@@ -20,7 +20,7 @@ def print(students)
   i=0
   while i < students.length
   	student = students[i]
-    puts "#{i} #{student[:name]} (#{student[:cohort]} cohort)"
+    puts "#{i} #{student[:name]} (#{student[:cohort]} cohort), (#{student[:nationality]})"
     i += 1
   end
   # students.each_with_index do |student,i|
