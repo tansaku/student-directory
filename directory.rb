@@ -12,8 +12,8 @@ students = [
 ]
 
 def print_header
-  puts "The students of my cohort at Makers Academy"
-  puts "-------------"
+  puts "The students of my cohort at Makers Academy".center 80
+  puts "-------------".center 80
 end
 
 def print(students)
@@ -30,7 +30,7 @@ end
 
 
 def print_footer(names)
-  puts "Overall, we have #{names.length} great students"
+  puts "Overall, we have #{names.length} great students".center 80
 end
 
 def input_students
