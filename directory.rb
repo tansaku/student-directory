@@ -63,7 +63,7 @@ def input_students
     students << process_user_input(student)
     puts "Now we have #{students.length} students"
     # get another name from the user
-    student = gets.chomp
+    student = gets.delete("\n")
   end
   # return the array of students
   students
