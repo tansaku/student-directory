@@ -54,10 +54,12 @@ def input_students
   students
 end
 
+MONTHS = ['january','february','march','april','may','june','july','august','september','october','november','december']
+
 def process_user_input str
   raise 'please enter name and cohort comma separated, e.g. John, november' unless str.include? ','
   name, cohort = str.split(',').map{|s| s.strip}
-  cohort = 'november' if cohort.empty?
+  cohort = 'november' if cohort.empty? or !MONTHS.include? cohort.downcase
   name = 'John' if name.empty?
   {:name => name, :cohort => cohort.to_sym, :nationality => 'US'}
 end
@@ -79,6 +81,8 @@ student = process_user_input 'John, '
 raise 'failed missing cohort' unless student == {:name => 'John', :cohort => :november, :nationality => 'US'}
 student = process_user_input ', november'
 raise 'failed missing name' unless student == {:name => 'John', :cohort => :november, :nationality => 'US'}
+student = process_user_input ', nvember'
+raise 'failed cohort typo' unless student == {:name => 'John', :cohort => :november, :nationality => 'US'}
 begin  
   student = process_user_input '32ewdqrq3w'
   raise 'failed to throw comma exception'
