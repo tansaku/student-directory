@@ -34,9 +34,20 @@ def print(students)
 
 end
 
+def pluralize noun, number
+  noun += 's' if number > 1
+  noun
+end
+
+str = pluralize "student", 1
+raise 'failed basic pluralize' unless str == "student"
+str = pluralize "student", 3
+raise 'failed basic pluralize' unless str == "students"
+
+
 
 def print_footer(names)
-  puts "Overall, we have #{names.length} great students".center 80
+  puts "Overall, we have #{names.length} great #{pluralize 'student', names.length}".center 80
 end
 
 def input_students
@@ -96,7 +107,7 @@ end
 
 
 # nothing happens until we call the methods
-#students = input_students
+students = input_students
 print_header
 print(students)
 print_footer(students)
