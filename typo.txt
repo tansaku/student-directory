@@ -33,6 +33,6 @@ def input_students
 end
 
 students = input_students
-print_header
-print students 
+print_header 
+print students unless students.empty?
 print_footer students 
