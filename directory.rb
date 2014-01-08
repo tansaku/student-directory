@@ -2,7 +2,7 @@ require 'debugger'
 #Debugger.start(:post_mortem => true)
 # let's put all students into a hash
 students = [
-  {:name => "Dr. Hannibal Lecter", :cohort => :november, :nationality => 'US'},
+  {:name => "Dr. Hannibal Lecter", :cohort => :may, :nationality => 'US'},
   {:name => "Darth Vader", :cohort => :november, :nationality => 'US'},
   {:name => "Nurse Ratched", :cohort => :november, :nationality => 'US'},
   {:name => "Michael Corleone", :cohort => :november, :nationality => 'US'},
@@ -10,7 +10,7 @@ students = [
   {:name => "The Alien", :cohort => :november, :nationality => 'US'},
   {:name => "Terminator", :cohort => :november, :nationality => 'US'},
   {:name => "Freddy Kruger", :cohort => :november, :nationality => 'US'},
-  {:name => "The Joker", :cohort => :november, :nationality => 'US'}
+  {:name => "The Joker", :cohort => :may, :nationality => 'US'}
 ]
 
 def print_header
@@ -20,14 +20,18 @@ end
 
 def print(students)
   i=0
-  while i < students.length
-  	student = students[i]
-    puts "#{i} #{student[:name]} (#{student[:cohort]} cohort), (#{student[:nationality]})"
-    i += 1
+  #debugger
+  MONTHS.each do |m| 
+  	cohort = students.select {|s| s[:cohort] == m.to_sym }
+  	unless cohort.empty?
+  		puts "\n#{m} cohort"
+	  	cohort.each_with_index do |student,i|
+	      puts "#{i} #{student[:name]}"
+	    end 
+    end
   end
-  # students.each_with_index do |student,i|
-  #   puts "#{i} #{student[:name]} (#{student[:cohort]} cohort)"
-  # end
+
+
 end
 
 
@@ -92,7 +96,7 @@ end
 
 
 # nothing happens until we call the methods
-students = input_students
+#students = input_students
 print_header
 print(students)
 print_footer(students)
