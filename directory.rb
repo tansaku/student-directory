@@ -15,11 +15,11 @@ students = [
 ]
 
 def print_header
-  puts "The students of my cohort at Makers Academy".center 80
+  puts "The students at Makers Academy".center 80
   puts "-------------".center 80
 end
 
-def print
+def print_students_list
   i=0
   #debugger
   MONTHS.each do |m| 
@@ -27,7 +27,7 @@ def print
   	unless cohort.empty?
   		puts "\n#{m} cohort"
 	  	cohort.each_with_index do |student,i|
-	      puts "#{i} #{student[:name]}"
+	      puts "#{i+1} #{student[:name]}"
 	    end 
     end
   end
@@ -54,20 +54,17 @@ end
 def input_students
   puts "Please enter the name and cohort of the students, e.g. John, november"
   puts "To finish, just hit return twice"
-  # create an empty array
-  students = []
   # get the first name
   student = gets.chomp
   # while the name is not empty, repeat this code
   while !student.empty? do
     # add the student hash to the array
-    students << process_user_input(student)
-    puts "Now we have #{students.length} students"
+    @students << process_user_input(student)
+    puts "Now we have #{@students.length} students"
     # get another name from the user
     student = gets.delete("\n")
   end
-  # return the array of students
-  students
+
 end
 
 MONTHS = ['january','february','march','april','may','june','july','august','september','october','november','december']
@@ -77,7 +74,7 @@ def process_user_input str
   name, cohort = str.split(',').map{|s| s.strip}
   cohort = 'november' if cohort.empty? or !MONTHS.include? cohort.downcase
   name = 'John' if name.empty?
-  {:name => name, :cohort => cohort.to_sym, :nationality => 'US'}
+  {:name => name, :cohort => cohort.downcase.to_sym, :nationality => 'US'}
 end
 
 
@@ -91,6 +88,8 @@ student = process_user_input ', november'
 raise 'failed missing name' unless student == {:name => 'John', :cohort => :november, :nationality => 'US'}
 student = process_user_input ', nvember'
 raise 'failed cohort typo' unless student == {:name => 'John', :cohort => :november, :nationality => 'US'}
+student = process_user_input 'Bert, November'
+raise 'failed to downcase cohort' unless student == {:name => 'Bert', :cohort => :november, :nationality => 'US'}
 begin  
   student = process_user_input '32ewdqrq3w'
   raise 'failed to throw comma exception'
@@ -106,27 +105,27 @@ end
 
 def show_students
   print_header
-  print
+  print_students_list
   print_footer
 end
 
 def interactive_menu
   loop do
-  # 1. print the menu and ask the user what to do
-  print_menu
-  # 2. read the input and save it into a variable
-  selection = gets.chomp
-  # 3. do what the user has asked
+    print_menu
+    process(gets.chomp)
+  end
+end
+
+def process(selection)
   case selection
   when "1"
-    # input the students
+    input_students
   when "2"
     show_students
   when "9"
-    exit # this will cause the program to terminate
+    exit
   else
-    puts "I don't know what you meant, try again"
-  end
+    puts "I don't know what you mean, try again"
   end
 end
 
