@@ -79,14 +79,6 @@ def process_user_input str
   {:name => name, :cohort => cohort.to_sym, :nationality => 'US'}
 end
 
-# In the input_students method the cohort value is hard-coded. 
-# How can you ask for both the name and the cohort? 
-# What if one of the values is empty? 
-# Can you supply a default value? 
-# The input will be given to you as a string? 
-# How will you convert it to a symbol? 
-# What if the user makes a typo? <-- ambiguous - typo in name, cohort?
-# implement general ability to delete and replace existing users?
 
 student = process_user_input 'John, november'
 raise 'failed basic input' unless student == {:name => 'John', :cohort => :november, :nationality => 'US'}
@@ -106,8 +98,16 @@ rescue Exception => e
 end
 
 
+def interactive_menu
+  # 1. print the menu and ask the user what to do
+  # 2. read the input and save it into a variable
+  # 3. do what the user has asked
+  # 4. repeat from step 1
+end
+
+
 # nothing happens until we call the methods
-students = input_students
+#students = input_students
 print_header
 print(students)
 print_footer(students)
