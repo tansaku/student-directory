@@ -1,6 +1,7 @@
 require 'debugger'
 #Debugger.start(:post_mortem => true)
 # let's put all students into a hash
+@students = []
 students = [
   {:name => "Dr. Hannibal Lecter", :cohort => :may, :nationality => 'US'},
   {:name => "Darth Vader", :cohort => :november, :nationality => 'US'},
@@ -18,11 +19,11 @@ def print_header
   puts "-------------".center 80
 end
 
-def print(students)
+def print
   i=0
   #debugger
   MONTHS.each do |m| 
-  	cohort = students.select {|s| s[:cohort] == m.to_sym }
+  	cohort = @students.select {|s| s[:cohort] == m.to_sym }
   	unless cohort.empty?
   		puts "\n#{m} cohort"
 	  	cohort.each_with_index do |student,i|
@@ -46,8 +47,8 @@ raise 'failed basic pluralize' unless str == "students"
 
 
 
-def print_footer(names)
-  puts "Overall, we have #{names.length} great #{pluralize 'student', names.length}".center 80
+def print_footer
+  puts "Overall, we have #{@students.length} great #{pluralize 'student', @students.length}".center 80
 end
 
 def input_students
@@ -97,14 +98,22 @@ rescue Exception => e
   raise 'failed missing comma' unless e.to_s == "please enter name and cohort comma separated, e.g. John, november"
 end
 
-
-def interactive_menu
-  students = []
-  loop do
-  # 1. print the menu and ask the user what to do
+def print_menu 
   puts "1. Input the students"
   puts "2. Show the students"
   puts "9. Exit" # 9 because we'll be adding more items
+end
+
+def show_students
+  print_header
+  print
+  print_footer
+end
+
+def interactive_menu
+  loop do
+  # 1. print the menu and ask the user what to do
+  print_menu
   # 2. read the input and save it into a variable
   selection = gets.chomp
   # 3. do what the user has asked
@@ -112,9 +121,7 @@ def interactive_menu
   when "1"
     # input the students
   when "2"
-    print_header
-    print(students)
-    print_footer(students)
+    show_students
   when "9"
     exit # this will cause the program to terminate
   else
