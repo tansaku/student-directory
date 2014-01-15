@@ -10,6 +10,10 @@ students = [
   {:name => "Freddy Kruger", :cohort => :november},
   {:name => "The Joker", :cohort => :november}
 ]
+test_students = [
+  {:name => "Sam", :cohort => :november},
+  {:name => "John", :cohort => :november},
+]
 
 def print_header
   puts "The students of my cohort at Makers Academy"
@@ -17,10 +21,14 @@ def print_header
 end
 
 def print(students)
+  output = ""
   students.each do |student|
-    puts "#{student[:name]} (#{student[:cohort]} cohort)"
+    output << "#{student[:name]} (#{student[:cohort]} cohort)\n"
   end
+  output
 end
+
+raise "test students not printing correctly" unless print(test_students) == "0 Sam (november cohort)\n1 John (november cohort)\n"
 
 
 def print_footer(names)
@@ -49,5 +57,5 @@ end
 # nothing happens until we call the methods
 students = input_students
 print_header
-print(students)
+puts print(students)
 print_footer(students)
