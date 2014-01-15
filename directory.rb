@@ -31,8 +31,6 @@ def print_students_list
 	    end 
     end
   end
-
-
 end
 
 def pluralize noun, number
@@ -44,8 +42,6 @@ str = pluralize "student", 1
 raise 'failed basic pluralize' unless str == "student"
 str = pluralize "student", 3
 raise 'failed basic pluralize' unless str == "students"
-
-
 
 def print_footer
   puts "Overall, we have #{@students.length} great #{pluralize 'student', @students.length}".center 80
@@ -96,14 +92,6 @@ rescue Exception => e
   raise 'failed missing comma' unless e.to_s == "please enter name and cohort comma separated, e.g. John, november"
 end
 
-def print_menu 
-  puts "1. Input the students"
-  puts "2. Show the students"
-  puts "3. Save the list to students.csv"
-  puts "4. Load the list from students.csv"
-  puts "9. Exit" # 9 because we'll be adding more items
-end
-
 def show_students
   print_header
   print_students_list
@@ -147,13 +135,6 @@ def add_student(name,cohort)
   @students << {:name => name, :cohort => cohort.to_sym}
 end
 
-def interactive_menu
-  loop do
-    print_menu
-    process(STDIN.gets.chomp)
-  end
-end
-
 def process(selection)
   case selection
   when "1"
@@ -171,6 +152,20 @@ def process(selection)
   end
 end
 
+def print_menu 
+  puts "1. Input the students"
+  puts "2. Show the students"
+  puts "3. Save the list to students.csv"
+  puts "4. Load the list from students.csv"
+  puts "9. Exit" # 9 because we'll be adding more items
+end
+
+def interactive_menu
+  loop do
+    print_menu
+    process(STDIN.gets.chomp)
+  end
+end
 
 # nothing happens until we call the methods
 #students = input_students
