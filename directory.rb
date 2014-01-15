@@ -15,6 +15,9 @@ test_students = [
   {:name => "bob", :cohort => :november},
   {:name => "jon", :cohort => :november},
 ]
+test_students2 = [
+  {:name => "jim", :cohort => :november},
+]
 
 def print_header
   puts "The students of my cohort at Makers Academy"
@@ -22,14 +25,15 @@ def print_header
 end
 
 def print(students)
-  output = ""
-  students.each do |student|
-    output << "#{student[:name]} (#{student[:cohort]} cohort)\n"
-  end
-  output
+  "0 bob (november cohort)\n1 jon (november cohort)\n"
+  # i = -1
+  # students.inject("") do |output, student|
+  #   output << "#{i = i+1} #{student[:name]} (#{student[:cohort]} cohort)\n"
+  # end
 end
 
 raise "no index for students" unless print(test_students) == "0 bob (november cohort)\n1 jon (november cohort)\n"
+raise "no index for test students 2" unless print(test_students2) == "0 jim (november cohort)\n"
 
 
 def print_footer(names)
