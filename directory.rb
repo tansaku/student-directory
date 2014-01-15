@@ -14,6 +14,10 @@ test_students = [
   {:name => "Sam", :cohort => :november},
   {:name => "John", :cohort => :november},
 ]
+test_students2 = [
+  {:name => "Bert", :cohort => :november},
+  {:name => "Matt", :cohort => :november},
+]
 
 def print_header
   puts "The students of my cohort at Makers Academy"
@@ -21,13 +25,8 @@ def print_header
 end
 
 def print(students)
-  #output = ""
-  #students.each_with_index do |student, i|
-  #  output << "#{i} #{student[:name]} (#{student[:cohort]} cohort)\n"
-  #end
-  #i = -1
-  #students.inject(""){ |sum, student| sum << "#{i=i+1} #{student[:name]} (#{student[:cohort]} cohort)\n" ; sum }
-  "0 Sam (november cohort)\n1 John (november cohort)\n"
+  i = -1
+  students.inject(""){ |sum, student| sum << "#{i=i+1} #{student[:name]} (#{student[:cohort]} cohort)\n" ; sum }
 end
 
 puts 'test output:'
@@ -35,6 +34,7 @@ puts 'test output:'
 
 puts 'runnig test'
 raise "test students not printing correctly" unless print(test_students) == "0 Sam (november cohort)\n1 John (november cohort)\n"
+raise "test students not printing correctly" unless print(test_students2) == "0 Bert (november cohort)\n1 Matt (november cohort)\n"
 
 
 def print_footer(names)
