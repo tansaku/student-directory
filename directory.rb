@@ -11,16 +11,25 @@ students = [
   {:name => "The Joker", :cohort => :november}
 ]
 
+test_students = [
+  {:name => "bob", :cohort => :november},
+  {:name => "jon", :cohort => :november},
+]
+
 def print_header
   puts "The students of my cohort at Makers Academy"
   puts "-------------"
 end
 
 def print(students)
+  output = ""
   students.each do |student|
-    puts "#{student[:name]} (#{student[:cohort]} cohort)"
+    output << "#{student[:name]} (#{student[:cohort]} cohort)\n"
   end
+  output
 end
+
+raise "no index for students" unless print(test_students) == "0 bob (november cohort)\n1 jon (november cohort)\n"
 
 
 def print_footer(names)
@@ -49,5 +58,5 @@ end
 # nothing happens until we call the methods
 students = input_students
 print_header
-print(students)
+puts print(students)
 print_footer(students)
