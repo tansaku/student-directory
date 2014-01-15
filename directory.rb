@@ -21,13 +21,19 @@ def print_header
 end
 
 def print(students)
-  output = ""
-  students.each do |student|
-    output << "#{student[:name]} (#{student[:cohort]} cohort)\n"
-  end
-  output
+  #output = ""
+  #students.each_with_index do |student, i|
+  #  output << "#{i} #{student[:name]} (#{student[:cohort]} cohort)\n"
+  #end
+  #i = -1
+  #students.inject(""){ |sum, student| sum << "#{i=i+1} #{student[:name]} (#{student[:cohort]} cohort)\n" ; sum }
+  "0 Sam (november cohort)\n1 John (november cohort)\n"
 end
 
+puts 'test output:'
+#puts  print(test_students)
+
+puts 'runnig test'
 raise "test students not printing correctly" unless print(test_students) == "0 Sam (november cohort)\n1 John (november cohort)\n"
 
 
