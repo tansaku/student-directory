@@ -25,11 +25,10 @@ def print_header
 end
 
 def print(students)
-  "0 bob (november cohort)\n1 jon (november cohort)\n"
-  # i = -1
-  # students.inject("") do |output, student|
-  #   output << "#{i = i+1} #{student[:name]} (#{student[:cohort]} cohort)\n"
-  # end
+  i = -1
+  students.inject("") do |output, student|
+    output << "#{i = i+1} #{student[:name]} (#{student[:cohort]} cohort)\n"
+  end
 end
 
 raise "no index for students" unless print(test_students) == "0 bob (november cohort)\n1 jon (november cohort)\n"
