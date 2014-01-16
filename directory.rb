@@ -14,6 +14,7 @@ students = [
   {:name => "Freddy Kruger", :cohort => :november, :nationality => 'US'},
   {:name => "The Joker", :cohort => :may, :nationality => 'US'}
 ]
+@filename = "students.csv"
 
 def print_header
   puts "The students at Makers Academy".center 80
@@ -101,7 +102,7 @@ end
 
 def save_students
   # open the file for writing
-  CSV.open("students.csv", "w") do |csv|
+  CSV.open(@filename, "w") do |csv|
     # iterate over the array of students
     @students.each do |student|
       csv << [student[:name], student[:cohort]]
@@ -109,9 +110,13 @@ def save_students
   end
 end
 
-def load_students(filename = "students.csv")
-  CSV.foreach(filename, "r") do |col|
-	  add_student(col[0], col[1])
+def load_students
+  if File.exists?(@filename)
+    CSV.foreach(@filename, "r") do |col|
+  	  add_student(col[0], col[1])
+    end
+  else
+    puts "Sorry, #{@filename} doesn't exist."
   end
 end
 
@@ -119,7 +124,8 @@ def try_load_students
   filename = ARGV.first # first argument from the command line
   return if filename.nil? # get out of the method if it isn't given
   if File.exists?(filename) # if it exists
-    load_students(filename)
+    @filename = filename
+    load_students
     puts "Loaded #{@students.length} from #{filename}"
   else # if it doesn't exist
     puts "Sorry, #{filename} doesn't exist."
@@ -131,6 +137,12 @@ def add_student(name,cohort)
   @students << {:name => name, :cohort => cohort.to_sym}
 end
 
+def check_filename
+  puts "Please enter filename, or press return for #{@filename}"
+  response = STDIN.gets.chomp
+  @filename = response unless response.empty?
+end
+
 def process(selection)
   case selection
   when "1"
@@ -138,8 +150,10 @@ def process(selection)
   when "2"
     show_students
   when "3"
+    check_filename
     save_students
   when "4"
+    check_filename
     load_students
   when "9"
     exit
@@ -151,8 +165,8 @@ end
 def print_menu 
   puts "1. Input the students"
   puts "2. Show the students"
-  puts "3. Save the list to students.csv"
-  puts "4. Load the list from students.csv"
+  puts "3. Save the list to #{@filename}"
+  puts "4. Load the list from #{@filename}"
   puts "9. Exit" # 9 because we'll be adding more items
 end
 
