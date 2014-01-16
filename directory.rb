@@ -1,4 +1,5 @@
 require 'debugger'
+require 'CSV'
 #Debugger.start(:post_mortem => true)
 # let's put all students into a hash
 @students = []
@@ -100,22 +101,17 @@ end
 
 def save_students
   # open the file for writing
-  File.open("students.csv", "w") do |file|
+  CSV.open("students.csv", "w") do |csv|
     # iterate over the array of students
     @students.each do |student|
-      student_data = [student[:name], student[:cohort]]
-      csv_line = student_data.join(",")
-      file.puts csv_line
+      csv << [student[:name], student[:cohort]]
     end
   end
 end
 
 def load_students(filename = "students.csv")
-  File.open(filename, "r") do |file|
-	  file.readlines.each do |line|
-	    name, cohort = line.chomp.split(',')
-	    add_student(name, cohort)
-	  end
+  CSV.foreach(filename, "r") do |col|
+	  add_student(col[0], col[1])
   end
 end
 
