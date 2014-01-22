@@ -56,7 +56,7 @@ def input_students
   # create an empty array
   students = []
   # get the first name
-  student = gets.chomp
+  student = gets.delete("\n")
   # while the name is not empty, repeat this code
   while !student.empty? do
     # add the student hash to the array
