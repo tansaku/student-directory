@@ -35,7 +35,7 @@ def print(students)
 end
 
 def pluralize noun, number
-  noun += 's' if number > 1
+  noun += 's' unless number == 1
   noun
 end
 
@@ -61,7 +61,7 @@ def input_students
   while !student.empty? do
     # add the student hash to the array
     students << process_user_input(student)
-    puts "Now we have #{students.length} students"
+    puts "Now we have #{students.length} #{pluralize 'student', students.length}"
     # get another name from the user
     student = gets.chomp
   end
